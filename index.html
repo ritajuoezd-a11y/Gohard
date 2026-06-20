@@ -47,9 +47,9 @@
       "@type": "MenuSection",
       "name": "Mains",
       "hasMenuItem": [
-        { "@type": "MenuItem", "name": "Comfort Rice Bowl", "offers": { "@type": "Offer", "price": "200", "priceCurrency": "NGN" } },
-        { "@type": "MenuItem", "name": "Spaghetti & Meatballs", "offers": { "@type": "Offer", "price": "200", "priceCurrency": "NGN" } },
-        { "@type": "MenuItem", "name": "Baked Macaroni", "offers": { "@type": "Offer", "price": "200", "priceCurrency": "NGN" } }
+        { "@type": "MenuItem", "name": "Comfort Rice Bowl", "offers": { "@type": "Offer", "price": "500", "priceCurrency": "NGN" } },
+        { "@type": "MenuItem", "name": "Spaghetti & Meatballs", "offers": { "@type": "Offer", "price": "1500", "priceCurrency": "NGN" } },
+        { "@type": "MenuItem", "name": "Baked Macaroni", "offers": { "@type": "Offer", "price": "2000", "priceCurrency": "NGN" } }
       ]
     }
   }
@@ -105,6 +105,1076 @@
 
   /* ---------- Buttons ---------- */
   .btn{
+    font-family:'DM Sans', sans-serif;
+    font-weight:700;
+    font-size:0.98rem;
+    padding:0.85rem 1.6rem;
+    border-radius:999px;
+    border:2px solid transparent;
+    cursor:pointer;
+    display:inline-flex;
+    align-items:center;
+    gap:0.5rem;
+    text-decoration:none;
+    transition:transform 0.15s ease, background 0.2s ease, box-shadow 0.2s ease;
+  }
+  .btn:hover{ transform:translateY(-2px); }
+  .btn:active{ transform:translateY(0); }
+  .btn-primary{ background:var(--tomato); color:var(--paper); box-shadow:var(--shadow); }
+  .btn-primary:hover{ background:var(--tomato-deep); }
+  .btn-primary:disabled{ background:#c9a98f; cursor:not-allowed; transform:none; box-shadow:none; }
+  .btn-ghost{ background:transparent; color:var(--ink); border-color:var(--ink); }
+  .btn-ghost:hover{ background:var(--ink); color:var(--bg); }
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(246,227,184,0.86);
+    backdrop-filter:blur(8px);
+    border-bottom:2px solid transparent;
+    transition:border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+  header.is-scrolled{ border-color:rgba(42,33,24,0.12); box-shadow:0 4px 16px rgba(42,33,24,0.08); }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:0.9rem 1.5rem;
+    max-width:var(--maxw); margin:0 auto;
+  }
+  .logo{
+    display:flex; align-items:center; gap:0.55rem;
+    font-family:'Bricolage Grotesque', sans-serif;
+    font-weight:800; font-size:1.3rem;
+    text-decoration:none; color:var(--ink);
+  }
+  .logo svg{ width:30px; height:30px; }
+  .nav-links{ display:flex; align-items:center; gap:1.8rem; list-style:none; margin:0; padding:0; }
+  .nav-links a{
+    text-decoration:none; font-weight:700; font-size:0.95rem; color:var(--ink);
+    position:relative; padding-bottom:2px;
+  }
+  .nav-links a::after{
+    content:""; position:absolute; left:0; bottom:-3px; width:0; height:2px; background:var(--tomato);
+    transition:width 0.2s ease;
+  }
+  .nav-links a:hover::after{ width:100%; }
+  .nav-cart{
+    font-family:'Space Mono', monospace; font-size:0.85rem; font-weight:700;
+    background:var(--ink); color:var(--bg); padding:0.45rem 0.9rem; border-radius:999px;
+    text-decoration:none; opacity:0; transform:translateY(-6px); pointer-events:none;
+    transition:opacity 0.2s ease, transform 0.2s ease;
+  }
+  .nav-cart.is-visible{ opacity:1; transform:translateY(0); pointer-events:auto; }
+
+  /* ---------- Hero ---------- */
+  .hero{ padding:4.5rem 0 5rem; position:relative; overflow:hidden; }
+  .hero-grid{ display:grid; grid-template-columns:1.15fr 0.85fr; gap:2.5rem; align-items:center; }
+  .hero h1{
+    font-size:clamp(3.2rem, 8vw, 6rem);
+    font-weight:800;
+    letter-spacing:-0.02em;
+    margin:0.6rem 0 1.1rem;
+  }
+  .hero h1 .line-2{ color:var(--tomato); }
+  .hero p.lede{ font-size:1.15rem; color:var(--ink-soft); max-width:32ch; margin-bottom:2rem; }
+  .hero-ctas{ display:flex; gap:0.9rem; flex-wrap:wrap; }
+  .hero-visual{ position:relative; display:flex; align-items:center; justify-content:center; }
+  .hero-visual .bowl-big{ width:100%; max-width:340px; }
+
+  /* steam */
+  .steam path{
+    stroke:var(--ink-soft); stroke-width:2.4; fill:none; stroke-linecap:round;
+    transform-origin:center; animation:drift 3.4s ease-in-out infinite;
+  }
+  .steam path:nth-child(2){ animation-delay:0.45s; }
+  .steam path:nth-child(3){ animation-delay:0.9s; }
+  @keyframes drift{
+    0%{ transform:translateY(2px) scaleX(1); opacity:0.35; }
+    50%{ transform:translateY(-7px) scaleX(1.18); opacity:0.85; }
+    100%{ transform:translateY(-15px) scaleX(0.9); opacity:0; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .steam path{ animation:none; opacity:0.5; }
+    *{ scroll-behavior:auto !important; }
+  }
+
+  /* ---------- Section headers ---------- */
+  .section-head{ max-width:46ch; margin-bottom:2.6rem; }
+  .section-head h2{ font-size:clamp(2rem, 4vw, 2.7rem); margin-top:0.5rem; }
+  .reveal{ opacity:0; transform:translateY(18px); transition:opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.is-visible{ opacity:1; transform:translateY(0); }
+
+  /* ---------- Menu ---------- */
+  .menu{ padding:5rem 0; background:var(--bg-deep); position:relative; }
+  .menu-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:1.6rem; }
+  .card{
+    background:var(--paper); border-radius:var(--radius-lg); padding:1.8rem 1.7rem 1.6rem;
+    box-shadow:var(--shadow); display:flex; flex-direction:column; position:relative;
+  }
+  .price-tag{
+    position:absolute; top:1.5rem; right:1.5rem;
+    font-family:'Space Mono', monospace; font-weight:700; font-size:0.95rem;
+    background:var(--gold); color:var(--ink); padding:0.3rem 0.7rem; border-radius:8px;
+    transform:rotate(3deg);
+  }
+  .card .icon-wrap{ width:120px; height:110px; margin:0 auto 0.5rem; }
+  .card h3{ font-size:1.45rem; margin-bottom:0.4rem; }
+  .card p.desc{ color:var(--ink-soft); font-size:0.96rem; margin:0 0 1.3rem; flex-grow:1; }
+  .stepper-row{ display:flex; align-items:center; justify-content:space-between; gap:0.8rem; }
+  .stepper{ display:flex; align-items:center; gap:0.6rem; }
+  .step-btn{
+    width:34px; height:34px; border-radius:50%; border:2px solid var(--ink);
+    background:var(--paper); color:var(--ink); font-size:1.2rem; font-weight:700;
+    cursor:pointer; display:flex; align-items:center; justify-content:center; line-height:1;
+    transition:background 0.15s ease, color 0.15s ease, transform 0.1s ease;
+  }
+  .step-btn:hover:not(:disabled){ background:var(--ink); color:var(--bg); }
+  .step-btn:disabled{ opacity:0.35; cursor:not-allowed; }
+  .step-qty{ font-family:'Space Mono', monospace; font-weight:700; min-width:1.4rem; text-align:center; }
+  .added-pill{
+    font-family:'Space Mono', monospace; font-size:0.78rem; font-weight:700;
+    color:var(--herb-deep); opacity:0; transition:opacity 0.2s ease;
+  }
+  .added-pill.is-on{ opacity:1; }
+
+  /* ---------- Order / ticket ---------- */
+  .order{ padding:5.5rem 0; }
+  .ticket{
+    background:var(--paper); border-radius:var(--radius-lg); box-shadow:var(--shadow);
+    padding:2.4rem 2.2rem; position:relative; overflow:hidden;
+  }
+  .ticket-top{
+    display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;
+    margin-bottom:1.4rem;
+  }
+  .ticket-top h3{ font-size:1.5rem; }
+  .ticket-num{ font-family:'Space Mono', monospace; color:var(--ink-soft); font-size:0.85rem; }
+  .order-list{ list-style:none; margin:0 0 0.6rem; padding:0; font-family:'Space Mono', monospace; font-size:0.95rem; }
+  .order-list li{ display:flex; justify-content:space-between; padding:0.45rem 0; border-bottom:1px dashed rgba(42,33,24,0.18); }
+  .order-empty{ color:var(--ink-soft); font-family:'DM Sans', sans-serif; font-size:0.95rem; padding:0.6rem 0; }
+  .order-total{
+    display:flex; justify-content:space-between; align-items:center;
+    font-family:'Space Mono', monospace; font-weight:700; font-size:1.1rem;
+    padding-top:0.7rem; margin-top:0.3rem;
+  }
+  .ticket-divider{ position:relative; border-top:2px dashed rgba(42,33,24,0.25); margin:1.8rem 0; }
+  .ticket-divider::before, .ticket-divider::after{
+    content:""; position:absolute; top:-13px; width:26px; height:26px; background:var(--bg); border-radius:50%;
+  }
+  .ticket-divider::before{ left:-2.2rem; }
+  .ticket-divider::after{ right:-2.2rem; }
+
+  .order-form{ display:grid; grid-template-columns:1fr 1fr; gap:1.1rem 1.2rem; }
+  .field{ display:flex; flex-direction:column; gap:0.35rem; }
+  .field.full{ grid-column:1 / -1; }
+  .field label{ font-weight:700; font-size:0.88rem; }
+  .field input[type=text], .field input[type=tel], .field input[type=time], .field textarea{
+    font-family:'DM Sans', sans-serif; font-size:0.97rem;
+    border:2px solid rgba(42,33,24,0.25); border-radius:10px; padding:0.7rem 0.85rem;
+    background:var(--bg); color:var(--ink);
+  }
+  .field input:focus, .field textarea:focus{ border-color:var(--herb); }
+  .field textarea{ resize:vertical; min-height:80px; }
+  .radio-row{ display:flex; gap:1.4rem; }
+  .radio-row label{ display:flex; align-items:center; gap:0.45rem; font-weight:500; cursor:pointer; }
+  .hint{ font-size:0.8rem; color:var(--ink-soft); }
+  .call-alt + .hint{ margin-top:0.4rem; }
+  .form-foot{ grid-column:1/-1; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-top:0.4rem; }
+  .call-alt{ font-size:0.9rem; color:var(--ink-soft); }
+  .call-alt a{ color:var(--tomato-deep); font-weight:700; text-decoration:none; }
+  .confirm-strip{
+    margin-top:1.3rem; padding:1rem 1.2rem; border-radius:12px; background:rgba(59,107,77,0.12);
+    border:2px solid var(--herb); font-size:0.95rem; display:none;
+  }
+  .confirm-strip.is-on{ display:block; }
+  .confirm-strip strong{ color:var(--herb-deep); }
+
+  /* ---------- Contact ---------- */
+  .contact{ padding:5.5rem 0; background:var(--bg-deep); }
+  .contact-grid{ display:grid; grid-template-columns:1fr 1fr; gap:2.4rem; }
+  .contact-card{ background:var(--paper); border-radius:var(--radius-lg); padding:2rem; box-shadow:var(--shadow); }
+  .contact-card h3{ font-size:1.25rem; margin-bottom:1rem; display:flex; align-items:center; gap:0.6rem; }
+  .contact-card h3 svg{ width:22px; height:22px; }
+  .addr{ font-style:normal; line-height:1.6; margin-bottom:1.1rem; }
+  .hours{ width:100%; border-collapse:collapse; font-family:'Space Mono', monospace; font-size:0.9rem; margin-bottom:0.2rem; }
+  .hours td{ padding:0.4rem 0; border-bottom:1px solid rgba(42,33,24,0.12); }
+  .hours td:last-child{ text-align:right; }
+  .contact-links{ display:flex; flex-direction:column; gap:0.7rem; margin-top:1.1rem; }
+  .contact-links a{ text-decoration:none; font-weight:700; display:flex; align-items:center; gap:0.55rem; }
+  .contact-links a:hover{ color:var(--tomato-deep); }
+  .social-row{ display:flex; gap:0.7rem; margin-top:1.3rem; }
+  .social-row a{
+    width:38px; height:38px; border-radius:50%; border:2px solid var(--ink);
+    display:flex; align-items:center; justify-content:center; text-decoration:none; color:var(--ink);
+    font-family:'Space Mono', monospace; font-weight:700; font-size:0.85rem;
+    transition:background 0.15s ease, color 0.15s ease;
+  }
+  .social-row a:hover{ background:var(--ink); color:var(--bg); }
+
+  /* ---------- Reservations ---------- */
+  .reserve{ padding:5.5rem 0; background:var(--bg-deep); }
+  .reserve-rate{
+    display:inline-flex; align-items:center; gap:0.5rem;
+    font-family:'Space Mono', monospace; font-size:0.85rem; font-weight:700;
+    background:var(--gold); color:var(--ink); padding:0.4rem 0.9rem; border-radius:999px;
+    margin-top:0.6rem;
+  }
+  .guest-row{ display:flex; align-items:center; justify-content:space-between; gap:0.8rem; }
+  .guest-row .hint{ margin-top:0.1rem; }
+
+  /* ---------- Reviews ---------- */
+  .reviews{ padding:5.5rem 0; }
+  .reviews-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:1.6rem; }
+  .review-card{
+    background:var(--paper); border-radius:var(--radius-lg); padding:1.9rem 1.7rem;
+    box-shadow:var(--shadow); display:flex; flex-direction:column; gap:0.9rem;
+  }
+  .stars{ font-size:1.1rem; letter-spacing:3px; }
+  .stars .filled{ color:var(--gold); }
+  .stars .empty{ color:rgba(42,33,24,0.2); }
+  .review-quote{ font-size:1.02rem; line-height:1.6; margin:0; }
+  .review-meta{
+    display:flex; align-items:center; justify-content:space-between;
+    margin-top:auto; padding-top:0.4rem;
+  }
+  .review-who{ display:flex; align-items:center; gap:0.6rem; }
+  .review-avatar{
+    width:34px; height:34px; border-radius:50%; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Space Mono', monospace; font-weight:700; font-size:0.78rem; color:var(--paper);
+  }
+  .review-meta strong{ font-size:0.95rem; }
+  .review-meta span{
+    font-family:'Space Mono', monospace; font-size:0.78rem; color:var(--herb-deep);
+  }
+
+  /* ---------- Story / trust signals ---------- */
+  .story{ padding:4.5rem 0 1rem; }
+  .story-grid{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:2.6rem; align-items:start; }
+  .story-text h2{ font-size:clamp(1.8rem, 3.4vw, 2.3rem); margin:0.5rem 0 1rem; }
+  .story-text p{ color:var(--ink-soft); font-size:1.02rem; max-width:46ch; margin:0 0 0.9rem; }
+  .trust-row{ display:grid; grid-template-columns:repeat(3, 1fr); gap:1rem; margin-top:1rem; }
+  .trust-card{
+    background:var(--paper); border-radius:var(--radius-md); padding:1.2rem 1rem;
+    box-shadow:var(--shadow); text-align:center;
+  }
+  .trust-card svg{ width:28px; height:28px; margin:0 auto 0.6rem; color:var(--tomato); }
+  .trust-card h4{ font-family:'DM Sans', sans-serif; font-size:0.92rem; font-weight:700; margin:0 0 0.25rem; }
+  .trust-card p{ font-size:0.8rem; color:var(--ink-soft); margin:0; line-height:1.4; }
+  .story-portrait{
+    background:var(--paper); border-radius:var(--radius-lg); box-shadow:var(--shadow);
+    padding:2rem; display:flex; flex-direction:column; align-items:center; text-align:center; gap:0.4rem;
+  }
+  .story-portrait .avatar{
+    width:78px; height:78px; border-radius:50%; background:var(--herb); color:var(--paper);
+    display:flex; align-items:center; justify-content:center; font-family:'Bricolage Grotesque', sans-serif;
+    font-weight:800; font-size:1.6rem; margin-bottom:0.6rem;
+  }
+  .story-portrait h4{ font-size:1.05rem; margin:0; }
+  .story-portrait span{ font-family:'Space Mono', monospace; font-size:0.78rem; color:var(--ink-soft); }
+  .story-portrait p{ font-size:0.92rem; color:var(--ink-soft); margin-top:0.7rem; line-height:1.55; }
+
+  .popular-pill{
+    position:absolute; top:1.5rem; left:1.5rem;
+    font-family:'Space Mono', monospace; font-weight:700; font-size:0.72rem; letter-spacing:0.04em;
+    background:var(--ink); color:var(--bg); padding:0.3rem 0.65rem; border-radius:999px;
+    text-transform:uppercase;
+  }
+
+  /* ---------- Floating actions ---------- */
+  .float-stack{ position:fixed; right:1.2rem; bottom:1.2rem; z-index:60; display:flex; flex-direction:column; gap:0.7rem; align-items:flex-end; }
+  .float-btn{
+    width:54px; height:54px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    box-shadow:0 8px 22px rgba(42,33,24,0.28); text-decoration:none; border:none; cursor:pointer;
+  }
+  .float-whatsapp{ background:var(--herb); color:var(--paper); position:relative; }
+  .float-whatsapp::before{
+    content:""; position:absolute; inset:0; border-radius:50%; background:var(--herb);
+    animation:pulse-ring 2.6s ease-out infinite;
+  }
+  @keyframes pulse-ring{
+    0%{ transform:scale(1); opacity:0.55; }
+    100%{ transform:scale(1.7); opacity:0; }
+  }
+  .float-top{
+    background:var(--paper); color:var(--ink); border:2px solid var(--ink);
+    opacity:0; transform:translateY(10px); pointer-events:none; transition:opacity 0.2s ease, transform 0.2s ease;
+  }
+  .float-top.is-visible{ opacity:1; transform:translateY(0); pointer-events:auto; }
+  @media (prefers-reduced-motion: reduce){ .float-whatsapp::before{ animation:none; display:none; } }
+
+  @media (max-width:880px){
+    .story-grid{ grid-template-columns:1fr; }
+    .trust-row{ grid-template-columns:1fr 1fr; }
+  }
+  @media (max-width:560px){
+    .trust-row{ grid-template-columns:1fr; }
+    .float-stack{ right:1rem; bottom:1rem; }
+    .float-btn{ width:48px; height:48px; }
+  }
+
+  footer{ padding:2.4rem 0; text-align:center; font-size:0.85rem; color:var(--ink-soft); }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:880px){
+    .hero-grid{ grid-template-columns:1fr; }
+    .hero-visual{ order:-1; max-width:260px; margin:0 auto; }
+    .contact-grid{ grid-template-columns:1fr; }
+    .order-form{ grid-template-columns:1fr; }
+    .field.full{ grid-column:1; }
+    .ticket-divider::before, .ticket-divider::after{ display:none; }
+  }
+  @media (max-width:560px){
+    .nav-links{ gap:0.85rem; }
+    .nav-links a{ font-size:0.82rem; }
+    .nav-links span.nav-label{ display:none; }
+    .hero{ padding:3rem 0 3.5rem; }
+    .ticket{ padding:1.7rem 1.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<header id="site-header">
+  <nav class="nav">
+    <a href="#top" class="logo" aria-label="Baby Chow home">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <circle cx="50" cy="50" r="46" fill="var(--tomato)"/>
+        <path d="M22 52 Q50 80 78 52 L74 56 Q50 76 26 56 Z" fill="var(--paper)"/>
+        <ellipse cx="50" cy="48" rx="22" ry="8" fill="var(--paper)"/>
+      </svg>
+      Baby Chow
+    </a>
+    <ul class="nav-links">
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#order">Order</a></li>
+      <li><a href="#reserve">Reserve</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#order" class="nav-cart" id="navCart">Ticket · ₦0</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero wrap">
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow">12 Kings Close, Mowe · Open daily except Monday</p>
+        <h1>BABY<br><span class="line-2">CHOW</span></h1>
+        <p class="lede">We picked three plates and refused to add a fourth. Rice, spaghetti &amp; meatballs, baked macaroni — each one made to order, every single day.</p>
+        <div class="hero-ctas">
+          <a href="#menu" class="btn btn-primary">See the menu</a>
+          <a href="#order" class="btn btn-ghost">Start an order</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <svg class="bowl-big" viewBox="0 0 200 200" aria-hidden="true">
+          <g class="steam">
+            <path d="M80 56 C73 44 87 36 80 24"/>
+            <path d="M100 60 C93 48 107 40 100 28"/>
+            <path d="M120 56 C113 44 127 36 120 24"/>
+          </g>
+          <ellipse cx="100" cy="118" rx="64" ry="18" fill="var(--herb)"/>
+          <path d="M38 118 Q100 168 162 118 L156 124 Q100 160 44 124 Z" fill="var(--herb-deep)"/>
+          <ellipse cx="100" cy="106" rx="48" ry="16" fill="var(--paper)"/>
+          <ellipse cx="100" cy="100" rx="20" ry="6" fill="var(--gold)" opacity="0.6"/>
+          <ellipse cx="78" cy="104" rx="3" ry="5" fill="var(--tomato)"/>
+          <ellipse cx="118" cy="102" rx="3" ry="5" fill="var(--tomato)"/>
+          <ellipse cx="98" cy="96" rx="3" ry="5" fill="var(--tomato)"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STORY / TRUST ============ -->
+  <section class="story wrap">
+    <div class="story-grid">
+      <div class="story-text reveal">
+        <p class="eyebrow">Why Baby Chow</p>
+        <h2>One pot, done properly, every day.</h2>
+        <p>Baby Chow started as a single pot of rice cooked for neighbours on Kings Close. We never set out to have a long menu — just three plates worth queuing for, made the same careful way each time.</p>
+        <p>No freezers, no shortcuts. If it's on the menu, it was cooked today.</p>
+
+        <div class="trust-row">
+          <div class="trust-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v6m0 8v6M2 12h6m8 0h6"/><circle cx="12" cy="12" r="3"/></svg>
+            <h4>Cooked fresh daily</h4>
+            <p>Nothing pre-made, nothing frozen and reheated.</p>
+          </div>
+          <div class="trust-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+            <h4>Ready in ~20 mins</h4>
+            <p>Order ahead on WhatsApp and time your pickup.</p>
+          </div>
+          <div class="trust-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-7.2-7-12a7 7 0 0 1 14 0c0 4.8-7 12-7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            <h4>Mowe, locally run</h4>
+            <p>12 Kings Close — pickup, delivery, or eat-in.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="story-portrait reveal">
+        <div class="avatar">BC</div>
+        <h4>The kitchen, day one</h4>
+        <span>Rita · founder</span>
+        <p>"I'd rather make three things people actually crave than ten things that are just okay. That's the whole idea behind Baby Chow."</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MENU ============ -->
+  <section class="menu" id="menu">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">The whole menu</p>
+        <h2>Three plates. Made right.</h2>
+      </div>
+
+      <div class="menu-grid" id="menuGrid">
+        <!-- Card 1: Rice -->
+        <article class="card reveal" data-item="rice">
+          <span class="price-tag">₦500</span>
+          <div class="icon-wrap">
+            <svg viewBox="0 0 100 100" aria-hidden="true">
+              <g class="steam">
+                <path d="M40 28 C36 22 44 18 40 12"/>
+                <path d="M50 30 C46 24 54 20 50 14"/>
+                <path d="M60 28 C56 22 64 18 60 12"/>
+              </g>
+              <ellipse cx="50" cy="62" rx="33" ry="10" fill="var(--herb)"/>
+              <path d="M18 62 Q50 92 82 62 L77 66 Q50 86 23 66 Z" fill="var(--herb-deep)"/>
+              <ellipse cx="50" cy="50" rx="25" ry="9" fill="var(--paper)"/>
+              <path d="M34 50 h3 M40 47 h3 M46 50 h3 M52 47 h3 M58 50 h3 M64 47 h3" stroke="var(--gold)" stroke-width="2.4" stroke-linecap="round"/>
+              <path d="M62 32 l14 -10 M76 22 l-2 5 M76 22 l-5 -1" stroke="var(--ink)" stroke-width="2" stroke-linecap="round" fill="none"/>
+            </svg>
+          </div>
+          <h3>Comfort Rice Bowl</h3>
+          <p class="desc">Short-grain rice steamed soft, finished with toasted sesame oil, scallion and a soy-butter glaze. Quiet, warm, exactly what it needs to be.</p>
+          <div class="stepper-row">
+            <div class="stepper">
+              <button class="step-btn" data-action="dec" data-item="rice" aria-label="Remove one Comfort Rice Bowl">−</button>
+              <span class="step-qty" id="qty-rice">0</span>
+              <button class="step-btn" data-action="inc" data-item="rice" aria-label="Add one Comfort Rice Bowl">+</button>
+            </div>
+            <span class="added-pill" id="pill-rice">in your ticket</span>
+          </div>
+        </article>
+
+        <!-- Card 2: Spaghetti & Meatballs -->
+        <article class="card reveal" data-item="spaghetti">
+          <span class="popular-pill">Most loved</span>
+          <span class="price-tag">₦1,500</span>
+          <div class="icon-wrap">
+            <svg viewBox="0 0 100 100" aria-hidden="true">
+              <g class="steam">
+                <path d="M40 26 C36 20 44 16 40 10"/>
+                <path d="M50 28 C46 22 54 18 50 12"/>
+                <path d="M60 26 C56 20 64 16 60 10"/>
+              </g>
+              <ellipse cx="50" cy="60" rx="36" ry="14" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/>
+              <ellipse cx="50" cy="58" rx="29" ry="10" fill="var(--gold)" opacity="0.35"/>
+              <path d="M24 58 C34 48 44 66 50 54 C56 42 66 62 76 52" stroke="var(--gold)" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+              <path d="M22 62 C34 54 46 68 58 56 C66 48 72 60 78 56" stroke="var(--gold)" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+              <circle cx="41" cy="53" r="6" fill="var(--tomato-deep)"/>
+              <circle cx="58" cy="57" r="6" fill="var(--tomato-deep)"/>
+              <circle cx="49" cy="46" r="6" fill="var(--tomato-deep)"/>
+            </svg>
+          </div>
+          <h3>Spaghetti &amp; Meatballs</h3>
+          <p class="desc">Slow Sunday-style tomato sauce, hand-rolled beef-and-pork meatballs, spaghetti cooked to order. The classic, no shortcuts taken.</p>
+          <div class="stepper-row">
+            <div class="stepper">
+              <button class="step-btn" data-action="dec" data-item="spaghetti" aria-label="Remove one Spaghetti and Meatballs">−</button>
+              <span class="step-qty" id="qty-spaghetti">0</span>
+              <button class="step-btn" data-action="inc" data-item="spaghetti" aria-label="Add one Spaghetti and Meatballs">+</button>
+            </div>
+            <span class="added-pill" id="pill-spaghetti">in your ticket</span>
+          </div>
+        </article>
+
+        <!-- Card 3: Macaroni -->
+        <article class="card reveal" data-item="mac">
+          <span class="price-tag">₦2,000</span>
+          <div class="icon-wrap">
+            <svg viewBox="0 0 100 100" aria-hidden="true">
+              <g class="steam">
+                <path d="M40 26 C36 20 44 16 40 10"/>
+                <path d="M50 28 C46 22 54 18 50 12"/>
+                <path d="M60 26 C56 20 64 16 60 10"/>
+              </g>
+              <ellipse cx="50" cy="60" rx="36" ry="14" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/>
+              <g fill="none" stroke="var(--gold)" stroke-width="3">
+                <circle cx="38" cy="54" r="4"/>
+                <circle cx="48" cy="50" r="4"/>
+                <circle cx="58" cy="55" r="4"/>
+                <circle cx="44" cy="61" r="4"/>
+                <circle cx="56" cy="63" r="4"/>
+                <circle cx="65" cy="58" r="4"/>
+                <circle cx="33" cy="62" r="4"/>
+              </g>
+              <path d="M30 50 Q50 42 70 50" stroke="var(--gold)" stroke-width="2.4" fill="none" stroke-linecap="round" opacity="0.7"/>
+            </svg>
+          </div>
+          <h3>Baked Macaroni</h3>
+          <p class="desc">Three-cheese bake with a sharp cheddar crust, finished under the broiler until the top cracks. Heavy spoon required.</p>
+          <div class="stepper-row">
+            <div class="stepper">
+              <button class="step-btn" data-action="dec" data-item="mac" aria-label="Remove one Baked Macaroni">−</button>
+              <span class="step-qty" id="qty-mac">0</span>
+              <button class="step-btn" data-action="inc" data-item="mac" aria-label="Add one Baked Macaroni">+</button>
+            </div>
+            <span class="added-pill" id="pill-mac">in your ticket</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ORDER ============ -->
+  <section class="order" id="order">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Put in your order</p>
+        <h2>Fill the ticket, send it to the kitchen.</h2>
+      </div>
+
+      <div class="ticket reveal">
+        <div class="ticket-top">
+          <h3>Your order</h3>
+          <span class="ticket-num" id="ticketNum">ticket #pending</span>
+        </div>
+
+        <ul class="order-list" id="orderList"></ul>
+        <p class="order-empty" id="orderEmpty">Your ticket's empty — add a plate from the menu above.</p>
+        <div class="order-total">
+          <span>Total</span>
+          <span id="orderTotal">₦0</span>
+        </div>
+
+        <div class="ticket-divider" aria-hidden="true"></div>
+
+        <form class="order-form" id="orderForm">
+          <div class="field">
+            <label for="custName">Name</label>
+            <input type="text" id="custName" name="custName" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="custPhone">Phone</label>
+            <input type="tel" id="custPhone" name="custPhone" autocomplete="tel" required>
+          </div>
+
+          <div class="field full">
+            <label>Pickup or delivery?</label>
+            <div class="radio-row">
+              <label><input type="radio" name="fulfillment" value="Pickup" checked> Pickup</label>
+              <label><input type="radio" name="fulfillment" value="Delivery"> Delivery</label>
+            </div>
+          </div>
+
+          <div class="field full" id="addressField" style="display:none;">
+            <label for="custAddress">Delivery address</label>
+            <input type="text" id="custAddress" name="custAddress" autocomplete="street-address">
+          </div>
+
+          <div class="field">
+            <label for="custTime">Preferred time</label>
+            <input type="time" id="custTime" name="custTime">
+            <span class="hint">Leave blank for as soon as it's ready</span>
+          </div>
+          <div class="field">
+            <label for="custNotes">Notes</label>
+            <input type="text" id="custNotes" name="custNotes" placeholder="Allergies, extra napkins, etc.">
+          </div>
+
+          <div class="form-foot">
+            <button type="submit" class="btn btn-primary" id="submitBtn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+              Send order via WhatsApp
+            </button>
+            <p class="call-alt">Or <a href="tel:+2348103905996">call</a> · <a href="#" id="orderEmailAlt">email</a> instead</p>
+            <p class="hint" id="orderEmailStatus" style="display:none;">Copied your order details — if the email opens blank, just paste.</p>
+          </div>
+        </form>
+
+        <div class="confirm-strip" id="confirmStrip">
+          <strong>Ticket sent.</strong> <span id="confirmText"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RESERVATIONS ============ -->
+  <section class="reserve" id="reserve">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Table reservations</p>
+        <h2>Save a table, any size up to ten.</h2>
+        <span class="reserve-rate">₦5,000 per person · up to 10 guests</span>
+      </div>
+
+      <div class="ticket reveal">
+        <div class="ticket-top">
+          <h3>Book a table</h3>
+          <span class="ticket-num" id="reserveNum">reservation #pending</span>
+        </div>
+
+        <div class="order-total" style="padding-top:0;">
+          <span>Estimated total (<span id="guestQty">2</span> guests)</span>
+          <span id="reserveTotal">₦10,000</span>
+        </div>
+
+        <div class="ticket-divider" aria-hidden="true"></div>
+
+        <form class="order-form" id="reserveForm">
+          <div class="field">
+            <label for="resName">Name</label>
+            <input type="text" id="resName" name="resName" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="resPhone">Phone</label>
+            <input type="tel" id="resPhone" name="resPhone" autocomplete="tel" required>
+          </div>
+
+          <div class="field">
+            <label for="resDate">Date</label>
+            <input type="date" id="resDate" name="resDate" required>
+          </div>
+          <div class="field">
+            <label for="resTime">Time</label>
+            <input type="time" id="resTime" name="resTime" required>
+          </div>
+
+          <div class="field full">
+            <label>Guests</label>
+            <div class="guest-row">
+              <div class="stepper">
+                <button type="button" class="step-btn" id="guestDec" aria-label="Remove one guest">−</button>
+                <span class="step-qty" id="guestQtyDisplay">2</span>
+                <button type="button" class="step-btn" id="guestInc" aria-label="Add one guest">+</button>
+              </div>
+              <span class="hint">Up to 10 guests per booking</span>
+            </div>
+          </div>
+
+          <div class="field full">
+            <label for="resNotes">Notes</label>
+            <input type="text" id="resNotes" name="resNotes" placeholder="Occasion, seating preference, etc.">
+          </div>
+
+          <div class="form-foot">
+            <button type="submit" class="btn btn-primary" id="reserveSubmitBtn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+              Send reservation via WhatsApp
+            </button>
+            <p class="call-alt">Or <a href="tel:+2348103905996">call</a> · <a href="#" id="reserveEmailAlt">email</a> instead</p>
+            <p class="hint" id="reserveEmailStatus" style="display:none;">Copied your reservation details — if the email opens blank, just paste.</p>
+          </div>
+        </form>
+
+        <div class="confirm-strip" id="reserveConfirmStrip">
+          <strong>Request sent.</strong> <span id="reserveConfirmText"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ REVIEWS ============ -->
+  <section class="reviews" id="reviews">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">What people say</p>
+        <h2>Straight from the regulars.</h2>
+      </div>
+
+      <div class="reviews-grid">
+        <article class="review-card reveal">
+          <div class="stars" aria-label="5 out of 5 stars"><span class="filled">★★★★★</span></div>
+          <p class="review-quote">The rice bowl is exactly what I want after a long shift — no fuss, properly seasoned, ready fast.</p>
+          <div class="review-meta">
+            <div class="review-who">
+              <span class="review-avatar" style="background:var(--tomato);">AO</span>
+              <strong>Adaeze O.</strong>
+            </div>
+            <span>Verified order</span>
+          </div>
+        </article>
+
+        <article class="review-card reveal">
+          <div class="stars" aria-label="5 out of 5 stars"><span class="filled">★★★★★</span></div>
+          <p class="review-quote">Best spaghetti and meatballs in Mowe, hands down. The sauce alone is worth the trip.</p>
+          <div class="review-meta">
+            <div class="review-who">
+              <span class="review-avatar" style="background:var(--herb);">ET</span>
+              <strong>Emeka T.</strong>
+            </div>
+            <span>Verified order</span>
+          </div>
+        </article>
+
+        <article class="review-card reveal">
+          <div class="stars" aria-label="4 out of 5 stars"><span class="filled">★★★★</span><span class="empty">★</span></div>
+          <p class="review-quote">Booked a table for eight and the macaroni didn't disappoint anyone. Already planning the next one.</p>
+          <div class="review-meta">
+            <div class="review-who">
+              <span class="review-avatar" style="background:var(--gold); color:var(--ink);">FA</span>
+              <strong>Funke A.</strong>
+            </div>
+            <span>Verified reservation</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Find us</p>
+        <h2>Come say hello.</h2>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-card reveal">
+          <h3>
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--tomato)" stroke-width="2"><path d="M12 21s-7-7.2-7-12a7 7 0 0 1 14 0c0 4.8-7 12-7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            Visit us
+          </h3>
+          <address class="addr">
+            12 Kings Close,<br>
+            Mowe<br>
+            Open daily 11:00–20:00, closed Monday
+          </address>
+          <a href="https://www.google.com/maps/search/?api=1&query=12+Kings+Close,+Mowe" target="_blank" rel="noopener" class="btn btn-ghost" style="font-size:0.88rem; padding:0.6rem 1.1rem;">Get directions →</a>
+
+          <table class="hours">
+            <tr><td>Monday</td><td>Closed</td></tr>
+            <tr><td>Tuesday – Friday</td><td>11:00 – 20:00</td></tr>
+            <tr><td>Saturday – Sunday</td><td>12:00 – 21:00</td></tr>
+          </table>
+        </div>
+
+        <div class="contact-card reveal">
+          <h3>
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--herb-deep)" stroke-width="2"><path d="M3 5h18v14H3z"/><path d="m3 6 9 7 9-7"/></svg>
+            Get in touch
+          </h3>
+          <div class="contact-links">
+            <a href="tel:+2348103905996">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.68 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0 1 22 16.92Z"/></svg>
+              0810 390 5996
+            </a>
+            <a href="mailto:ritajuoezd@gmail.com">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="m4 6 8 7 8-7"/></svg>
+              ritajuoezd@gmail.com
+            </a>
+          </div>
+          <div class="social-row">
+            <a href="#" aria-label="Baby Chow on Instagram">IG</a>
+            <a href="#" aria-label="Baby Chow on X">X</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>© <span id="year"></span> Baby Chow · 12 Kings Close, Mowe · Made with love and a lot of steam.</p>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // ---------- Menu data ----------
+  var MENU = {
+    rice:      { name: "Comfort Rice Bowl",        price: 500 },
+    spaghetti: { name: "Spaghetti & Meatballs",     price: 1500 },
+    mac:       { name: "Baked Macaroni",            price: 2000 }
+  };
+  var cart = { rice: 0, spaghetti: 0, mac: 0 };
+
+  function formatPrice(n){ return '₦' + n.toLocaleString('en-NG'); }
+
+  function copyText(text){
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).catch(function(){ legacyCopy(text); });
+    } else {
+      legacyCopy(text);
+    }
+  }
+  function legacyCopy(text){
+    try{
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+    }catch(err){ /* clipboard unavailable — mailto body still carries the text as backup */ }
+  }
+
+  function cartTotal(){
+    var total = 0;
+    Object.keys(cart).forEach(function(id){ total += cart[id] * MENU[id].price; });
+    return total;
+  }
+
+  function cartCount(){
+    return Object.keys(cart).reduce(function(sum, id){ return sum + cart[id]; }, 0);
+  }
+
+  function renderCart(){
+    Object.keys(cart).forEach(function(id){
+      var qty = cart[id];
+      document.getElementById('qty-' + id).textContent = qty;
+      var pill = document.getElementById('pill-' + id);
+      pill.classList.toggle('is-on', qty > 0);
+      var minus = document.querySelector('.step-btn[data-action="dec"][data-item="' + id + '"]');
+      minus.disabled = qty === 0;
+    });
+
+    var list = document.getElementById('orderList');
+    var empty = document.getElementById('orderEmpty');
+    list.innerHTML = '';
+    var any = false;
+    Object.keys(cart).forEach(function(id){
+      if(cart[id] > 0){
+        any = true;
+        var li = document.createElement('li');
+        var lineTotal = cart[id] * MENU[id].price;
+        li.innerHTML = '<span>' + cart[id] + 'x ' + MENU[id].name + '</span><span>' + formatPrice(lineTotal) + '</span>';
+        list.appendChild(li);
+      }
+    });
+    empty.style.display = any ? 'none' : 'block';
+    list.style.display = any ? 'block' : 'none';
+
+    document.getElementById('orderTotal').textContent = formatPrice(cartTotal());
+    document.getElementById('submitBtn').disabled = !any;
+
+    var navCart = document.getElementById('navCart');
+    var count = cartCount();
+    if(count > 0){
+      navCart.textContent = 'Ticket (' + count + ') · ' + formatPrice(cartTotal());
+      navCart.classList.add('is-visible');
+    } else {
+      navCart.classList.remove('is-visible');
+    }
+  }
+
+  document.getElementById('menuGrid').addEventListener('click', function(e){
+    var btn = e.target.closest('.step-btn');
+    if(!btn) return;
+    var id = btn.getAttribute('data-item');
+    var action = btn.getAttribute('data-action');
+    if(action === 'inc'){ cart[id] = Math.min(cart[id] + 1, 20); }
+    if(action === 'dec'){ cart[id] = Math.max(cart[id] - 1, 0); }
+    renderCart();
+  });
+
+  // ---------- Order form ----------
+  var fulfillmentRadios = document.querySelectorAll('input[name="fulfillment"]');
+  var addressField = document.getElementById('addressField');
+  fulfillmentRadios.forEach(function(radio){
+    radio.addEventListener('change', function(){
+      addressField.style.display = (radio.value === 'Delivery' && radio.checked) ? 'block' : 'none';
+    });
+  });
+
+  var ticketNumber = Math.floor(1000 + Math.random() * 9000);
+  document.getElementById('ticketNum').textContent = 'ticket #' + ticketNumber;
+  var WHATSAPP_NUMBER = '2348103905996';
+
+  function getOrderDetails(){
+    var name = document.getElementById('custName').value.trim();
+    var phone = document.getElementById('custPhone').value.trim();
+    var fulfillment = document.querySelector('input[name="fulfillment"]:checked').value;
+    var address = document.getElementById('custAddress').value.trim();
+    var time = document.getElementById('custTime').value;
+    var notes = document.getElementById('custNotes').value.trim();
+
+    var lines = [];
+    Object.keys(cart).forEach(function(id){
+      if(cart[id] > 0){
+        lines.push(cart[id] + 'x ' + MENU[id].name + ' - ' + formatPrice(cart[id] * MENU[id].price));
+      }
+    });
+
+    var messageParts = [
+      'Hi Baby Chow! I\'d like to place an order — ticket #' + ticketNumber,
+      '',
+      lines.join('\n'),
+      '',
+      'Total: ' + formatPrice(cartTotal()),
+      '',
+      'Name: ' + name,
+      'Phone: ' + phone,
+      'Fulfillment: ' + fulfillment + (fulfillment === 'Delivery' && address ? ' — ' + address : ''),
+      time ? 'Preferred time: ' + time : 'Preferred time: as soon as ready',
+      notes ? 'Notes: ' + notes : ''
+    ];
+    return { valid: !!(name && phone), message: messageParts.filter(Boolean).join('\n'), name: name };
+  }
+
+  document.getElementById('orderForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    if(cartCount() === 0) return;
+
+    var details = getOrderDetails();
+    if(!details.valid){
+      alert('Add your name and phone number so the kitchen can reach you.');
+      return;
+    }
+
+    var waLink = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(details.message);
+
+    var confirmStrip = document.getElementById('confirmStrip');
+    document.getElementById('confirmText').textContent = 'WhatsApp should be opening now with ticket #' + ticketNumber + ' filled in — just hit send. Prefer not to use WhatsApp? Call 0810 390 5996 or use the email link above and read off the same ticket number.';
+    confirmStrip.classList.add('is-on');
+
+    window.open(waLink, '_blank');
+  });
+
+  document.getElementById('orderEmailAlt').addEventListener('click', function(e){
+    e.preventDefault();
+    if(cartCount() === 0){
+      alert('Add a plate from the menu first.');
+      return;
+    }
+    var details = getOrderDetails();
+    if(!details.valid){
+      alert('Add your name and phone number so the kitchen can reach you.');
+      return;
+    }
+    var subject = 'Baby Chow order #' + ticketNumber + ' — ' + details.name;
+    copyText(details.message);
+    var mailto = 'mailto:ritajuoezd@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(details.message);
+    document.getElementById('orderEmailStatus').style.display = 'block';
+    window.location.href = mailto;
+  });
+
+  // ---------- Reservation form ----------
+  var RESERVE_RATE = 5000;
+  var guestCount = 2;
+  var guestQtyDisplay = document.getElementById('guestQtyDisplay');
+  var guestQtyLabel = document.getElementById('guestQty');
+  var reserveTotal = document.getElementById('reserveTotal');
+  var guestDec = document.getElementById('guestDec');
+  var guestInc = document.getElementById('guestInc');
+
+  function renderGuests(){
+    guestQtyDisplay.textContent = guestCount;
+    guestQtyLabel.textContent = guestCount;
+    reserveTotal.textContent = formatPrice(guestCount * RESERVE_RATE);
+    guestDec.disabled = guestCount <= 1;
+    guestInc.disabled = guestCount >= 10;
+  }
+  guestDec.addEventListener('click', function(){
+    guestCount = Math.max(guestCount - 1, 1);
+    renderGuests();
+  });
+  guestInc.addEventListener('click', function(){
+    guestCount = Math.min(guestCount + 1, 10);
+    renderGuests();
+  });
+  renderGuests();
+
+  var reservationNumber = Math.floor(1000 + Math.random() * 9000);
+  document.getElementById('reserveNum').textContent = 'reservation #' + reservationNumber;
+
+  function getReservationDetails(){
+    var name = document.getElementById('resName').value.trim();
+    var phone = document.getElementById('resPhone').value.trim();
+    var date = document.getElementById('resDate').value;
+    var time = document.getElementById('resTime').value;
+    var notes = document.getElementById('resNotes').value.trim();
+
+    var messageParts = [
+      'Hi Baby Chow! I\'d like to book a table — reservation #' + reservationNumber,
+      '',
+      'Guests: ' + guestCount,
+      'Estimated total: ' + formatPrice(guestCount * RESERVE_RATE),
+      '',
+      'Name: ' + name,
+      'Phone: ' + phone,
+      'Date: ' + date,
+      'Time: ' + time,
+      notes ? 'Notes: ' + notes : ''
+    ];
+    return { valid: !!(name && phone && date && time), message: messageParts.filter(Boolean).join('\n'), name: name };
+  }
+
+  document.getElementById('reserveForm').addEventListener('submit', function(e){
+    e.preventDefault();
+
+    var details = getReservationDetails();
+    if(!details.valid){
+      alert('Add your name, phone, date and time so the table can be held for you.');
+      return;
+    }
+
+    var waLink = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(details.message);
+
+    var confirmStrip = document.getElementById('reserveConfirmStrip');
+    document.getElementById('reserveConfirmText').textContent = 'WhatsApp should be opening now with reservation #' + reservationNumber + ' filled in — just hit send. Prefer not to use WhatsApp? Call 0810 390 5996 or use the email link above and read off the same reservation number.';
+    confirmStrip.classList.add('is-on');
+
+    window.open(waLink, '_blank');
+  });
+
+  document.getElementById('reserveEmailAlt').addEventListener('click', function(e){
+    e.preventDefault();
+    var details = getReservationDetails();
+    if(!details.valid){
+      alert('Add your name, phone, date and time so the table can be held for you.');
+      return;
+    }
+    var subject = 'Baby Chow reservation #' + reservationNumber + ' — ' + details.name;
+    var mailto = 'mailto:ritajuoezd@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(details.message);
+    window.location.href = mailto;
+  });
+
+  // ---------- Sticky header shadow ----------
+  var header = document.getElementById('site-header');
+  window.addEventListener('scroll', function(){
+    header.classList.toggle('is-scrolled', window.scrollY > 10);
+  }, { passive: true });
+
+  // ---------- Reveal on scroll ----------
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var reveals = document.querySelectorAll('.reveal');
+  if(prefersReduced || !('IntersectionObserver' in window)){
+    reveals.forEach(function(el){ el.classList.add('is-visible'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(function(el){ io.observe(el); });
+  }
+
+  renderCart();
+})();
+</script>
+
+</body>
+</html>
+{
     font-family:'DM Sans', sans-serif;
     font-weight:700;
     font-size:0.98rem;
